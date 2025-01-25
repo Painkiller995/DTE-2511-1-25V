@@ -85,7 +85,8 @@ def find_name_ranking(data: list[str], gender: str, name: str) -> tuple[str, int
         tuple: A tuple containing the name, count, and rank.
     """
     for line in data:
-        parts = line.split("\t")
+        parts = [part.strip() for part in line.split("\t")]
+
         rank = int(parts[0])
 
         if gender == "M":
