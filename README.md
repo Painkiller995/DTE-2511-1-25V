@@ -1,6 +1,6 @@
-# DTE-2510-1-24H: Task Repository
+# DTE-2511-1-25V: Task Repository
 
-Welcome to the DTE-2510-1-24H task repository. This repository is intended to document, organize, and track the progress of tasks related to the DTE-2510-1-24H project.
+Welcome to the DTE-2511-1-25V task repository. This repository is intended to document, organize, and track the progress of tasks related to the DTE-2511-1-25V project.
 
 ## Project Overview
 
