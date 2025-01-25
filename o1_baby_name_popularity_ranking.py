@@ -59,10 +59,10 @@ def fetch_ranking_data(url: str) -> list[str]:
     Get the ranking data from the file.
 
     Args:
-        url: The URL of the file.
+        - url: The URL of the file.
 
     Returns:
-        list: A list of the ranking data.
+        - list: A list of the ranking data.
     """
     response = requests.get(url, timeout=5)
 
@@ -77,12 +77,12 @@ def find_name_ranking(data: list[str], gender: str, name: str) -> tuple[str, int
     Parse the ranking data and search for the requested name and gender.
 
     Args:
-        data: The ranking data.
-        gender: M/F
-        name: The name to search for.
+        - data: The ranking data.
+        - gender: M/F
+        - name: The name to search for.
 
     Returns:
-        tuple: A tuple containing the name, count, and rank.
+        - tuple: A tuple containing the name, count, and rank.
     """
     for line in data:
         parts = [part.strip() for part in line.split("\t")]
