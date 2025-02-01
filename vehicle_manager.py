@@ -9,7 +9,7 @@ https://github.com/Painkiller995/DTE-2511-1-25V
 import atexit
 import os
 import pickle
-import o1_vehicles as vehicles
+import vehicles
 
 FILE_NAME = "vehicles.dat"
 
@@ -105,8 +105,8 @@ def get_vehicle_details():
     """
     Collect general vehicle details from the user.
     """
-    regnr = get_input("registration number")
-    brand = get_input("brand")
+    regnr = get_input("registration number").upper()
+    brand = get_input("brand").capitalize()
     model = get_input("model")
     model_year = get_input("model year", int)
     mileage = get_input("mileage", int)
@@ -169,7 +169,7 @@ def find_vehicle(brand: str, vehicles_list: list):
     found = False
     for item in vehicles_list:
         if item.brand.lower() == brand.lower():
-            print(item)
+            print(f"\n{item}.")
             found = True
     if not found:
         print("\nNo vehicles found with that make.")
@@ -213,7 +213,7 @@ def main():
                 show_vehicles(vehicles_list)
             elif choice == QUIT:
                 print("Exiting the program...")
-                on_exit(vehicles_list)
+                break
 
             input("\nPress Enter to return to the menu...")
 

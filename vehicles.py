@@ -31,12 +31,11 @@ class Vehicle:
         Returns a string representation of the vehicle.
         """
         return (
-            f"Vehicle Information:\n"
-            f"Registration Number: {self.regnr}\n"
-            f"Brand: {self.brand}\n"
-            f"Model: {self.model}\n"
-            f"Model Year: {self.model_year}\n"
-            f"Mileage: {self.mileage} km\n"
+            f"Registration Number: {self.regnr}, "
+            f"Brand: {self.brand}, "
+            f"Model: {self.model}, "
+            f"Model Year: {self.model_year}, "
+            f"Mileage: {self.mileage} km, "
             f"Price: {self.price} NOK"
         )
 
@@ -61,7 +60,7 @@ class Car(Vehicle):
         """
         Returns a string representation of the car.
         """
-        return super().__str__() + f"\nNumber of Doors: {self.num_doors}"
+        return super().__str__() + f", Number of Doors: {self.num_doors}"
 
 
 class Truck(Vehicle):
@@ -88,7 +87,7 @@ class Truck(Vehicle):
         """
         Returns a string representation of the truck.
         """
-        return super().__str__() + f"\nDrive Type: {self.drive_type}"
+        return super().__str__() + f", Drive Type: {self.drive_type}"
 
 
 class SUV(Vehicle):
@@ -108,4 +107,4 @@ class SUV(Vehicle):
         self.passenger_capacity = passenger_capacity
 
     def __str__(self) -> str:
-        return super().__str__() + f"\nPassenger Capacity: {self.passenger_capacity}"
+        return super().__str__() + f", Passenger Capacity: {self.passenger_capacity}"
