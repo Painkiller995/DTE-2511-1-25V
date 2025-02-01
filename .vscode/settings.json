@@ -4,6 +4,7 @@
         "cust",
         "padx",
         "pady",
+        "regnr",
         "validatecommand"
     ]
 }
