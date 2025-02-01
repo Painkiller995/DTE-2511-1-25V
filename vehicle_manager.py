@@ -9,6 +9,7 @@ https://github.com/Painkiller995/DTE-2511-1-25V
 import atexit
 import os
 import pickle
+from typing import Any, cast
 
 import vehicles
 
@@ -22,7 +23,7 @@ SHOW_VEHICLES = 5
 QUIT = 6
 
 
-def display_menu():
+def display_menu() -> None:
     """
     Displays a menu.
     """
@@ -36,14 +37,14 @@ def display_menu():
     print()
 
 
-def clear_screen():
+def clear_screen() -> None:
     """
     Clears the console screen.
     """
     os.system("cls" if os.name == "nt" else "clear")
 
 
-def load_vehicles(filename: str) -> list:
+def load_vehicles(filename: str) -> list[vehicles.Vehicle]:
     """
     Loads vehicles from a file.
     Args:
@@ -54,12 +55,12 @@ def load_vehicles(filename: str) -> list:
     """
     if os.path.exists(filename):
         with open(filename, "rb") as file:
-            return pickle.load(file)
+            return cast(list[vehicles.Vehicle], pickle.load(file))
     else:
         return []
 
 
-def save_vehicles(filename: str, vehicles_list: list) -> None:
+def save_vehicles(filename: str, vehicles_list: list[vehicles.Vehicle]) -> None:
     """
     Saves vehicles to a file.
 
@@ -71,7 +72,7 @@ def save_vehicles(filename: str, vehicles_list: list) -> None:
         pickle.dump(vehicles_list, file)
 
 
-def on_exit(vehicles_list: list):
+def on_exit(vehicles_list: list[vehicles.Vehicle]) -> None:
     """
     Saves the vehicles list to a file when the program exits.
 
@@ -82,7 +83,7 @@ def on_exit(vehicles_list: list):
     save_vehicles("vehicles.dat", vehicles_list)
 
 
-def get_input(prompt: str, value_type: type = str):
+def get_input(prompt: str, value_type: type = str) -> Any:
     """
     Get input from the user and validate it.
     Args:
@@ -102,7 +103,7 @@ def get_input(prompt: str, value_type: type = str):
                 print(f"Please enter a valid {prompt}.")
 
 
-def get_vehicle_details():
+def get_vehicle_details() -> tuple[str, str, str, int, int, int]:
     """
     Collect general vehicle details from the user.
     """
@@ -116,7 +117,7 @@ def get_vehicle_details():
     return regnr, brand, model, model_year, mileage, price
 
 
-def add_new_vehicle(choice, vehicles_list):
+def add_new_vehicle(choice: int, vehicles_list: list[vehicles.Vehicle]) -> None:
     """
     Adds a new vehicle based on user's choice.
     Args:
@@ -148,7 +149,7 @@ def add_new_vehicle(choice, vehicles_list):
         vehicles_list.append(new_suv)
 
 
-def show_vehicles(vehicles_list):
+def show_vehicles(vehicles_list: list[vehicles.Vehicle]) -> None:
     """
     Show all vehicles in a clean and concise format.
     """
@@ -160,7 +161,7 @@ def show_vehicles(vehicles_list):
             print(f"\n{idx}. {item}")
 
 
-def find_vehicle(brand: str, vehicles_list: list):
+def find_vehicle(brand: str, vehicles_list: list[vehicles.Vehicle]) -> None:
     """
     Find vehicles by make.
     Args:
@@ -176,7 +177,7 @@ def find_vehicle(brand: str, vehicles_list: list):
         print("\nNo vehicles found with that make.")
 
 
-def main():
+def main() -> None:
     """
     The main function.
     """

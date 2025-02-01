@@ -35,10 +35,7 @@ class Vehicle:
             - speed_ticket: The speed ticket to add.
         """
 
-        if all(
-            speed_ticket.time_stamp != ticket.time_stamp
-            for ticket in self.speed_tickets
-        ):
+        if all(speed_ticket.time_stamp != ticket.time_stamp for ticket in self.speed_tickets):
             self.speed_tickets.append(speed_ticket)
 
     def __str__(self) -> str:
@@ -133,5 +130,5 @@ class SpeedTicket:
         self.speed = speed
         self.speed_limit = speed_limit
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"Timestamp: {self.time_stamp}, Speed: {self.speed:.2f} km/h, Speed Limit: {self.speed_limit} km/h"

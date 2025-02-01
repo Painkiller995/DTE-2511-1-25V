@@ -8,7 +8,7 @@ https://github.com/Painkiller995/DTE-2511-1-25V
 
 from datetime import datetime
 
-from vehicles import Vehicle, SpeedTicket
+from vehicles import SpeedTicket, Vehicle
 
 ALLOWABLE_LIMIT = 1.05  # 5% above the speed limit
 
