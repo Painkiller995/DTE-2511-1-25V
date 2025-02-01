@@ -9,6 +9,7 @@ https://github.com/Painkiller995/DTE-2511-1-25V
 import atexit
 import os
 import pickle
+
 import vehicles
 
 FILE_NAME = "vehicles.dat"

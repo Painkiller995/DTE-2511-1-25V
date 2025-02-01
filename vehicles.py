@@ -25,6 +25,21 @@ class Vehicle:
         self.model_year = model_year
         self.mileage = mileage
         self.price = price
+        self.speed_tickets: list[SpeedTicket] = []
+
+    def add_speed_ticket(self, speed_ticket: "SpeedTicket") -> None:
+        """
+        Adds a speed ticket to the vehicle.
+
+        Args:
+            - speed_ticket: The speed ticket to add.
+        """
+
+        if all(
+            speed_ticket.time_stamp != ticket.time_stamp
+            for ticket in self.speed_tickets
+        ):
+            self.speed_tickets.append(speed_ticket)
 
     def __str__(self) -> str:
         """
@@ -108,3 +123,15 @@ class SUV(Vehicle):
 
     def __str__(self) -> str:
         return super().__str__() + f", Passenger Capacity: {self.passenger_capacity}"
+
+
+class SpeedTicket:
+    """Represents a speed ticket."""
+
+    def __init__(self, time_stamp: str, speed: float, speed_limit: int):
+        self.time_stamp = time_stamp
+        self.speed = speed
+        self.speed_limit = speed_limit
+
+    def __str__(self):
+        return f"Timestamp: {self.time_stamp}, Speed: {self.speed:.2f} km/h, Speed Limit: {self.speed_limit} km/h"
