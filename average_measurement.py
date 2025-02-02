@@ -19,11 +19,12 @@ def file_to_dict(file_name: str) -> dict[str, str]:
     Args:
         - file_name: The name of the file to read.
     """
-    with open(file_name, "r", encoding="utf-8") as file:
-        return {
-            line.split(",")[0].strip(): line.split(",")[1].strip()
-            for line in file.readlines()
-        }
+    try:
+        with open(file_name, encoding="utf-8") as file:
+            return {line.split(",")[0].strip(): line.split(",")[1].strip() for line in file.readlines()}
+    except FileNotFoundError:
+        print(f"Please make sure the file {file_name} exists in the current directory.")
+        return {}
 
 
 def find_speeders(
@@ -32,7 +33,7 @@ def find_speeders(
     speed_limit: int,
     distance: float,
     vehicles: dict[str, Vehicle],
-):
+) -> None:
     """
     Finds vehicles that exceed the speed limit and adds speed tickets.
 
@@ -65,7 +66,7 @@ def find_speeders(
                 vehicles[regnr].add_speed_ticket(ticket)
 
 
-def display_speeders(vehicles: dict[str, Vehicle]):
+def display_speeders(vehicles: dict[str, Vehicle]) -> None:
     """
     Displays all vehicles with speed tickets.
 
@@ -75,20 +76,20 @@ def display_speeders(vehicles: dict[str, Vehicle]):
     for vehicle in vehicles.values():
         if vehicle.speed_tickets:
             for ticket in vehicle.speed_tickets:
-                print(
-                    f"Registration Number: {vehicle.regnr}, Average Speed: {ticket.speed:.2f} km/h"
-                )
+                vehicle_info = f"Registration Number: {vehicle.regnr}, Average Speed: {ticket.speed:.2f} km/h"
+                if vehicle.brand != "Unknown":
+                    vehicle_info = f"Registration Number: {vehicle.regnr}, {vehicle.brand}-{vehicle.model}-{vehicle.model_year}, Average Speed: {ticket.speed:.2f} km/h"
+                print(vehicle_info)
 
 
-if __name__ == "__main__":
+def main() -> None:
+    """The main function."""
     box_a_data = file_to_dict("box_a.txt")
     box_b_data = file_to_dict("box_b.txt")
     ticketed_vehicles: dict[str, Vehicle] = {}
-    find_speeders(
-        box_a_data,
-        box_b_data,
-        speed_limit=60,
-        distance=5,
-        vehicles=ticketed_vehicles,
-    )
+    find_speeders(box_a_data, box_b_data, speed_limit=60, distance=5, vehicles=ticketed_vehicles)
     display_speeders(ticketed_vehicles)
+
+
+if __name__ == "__main__":
+    main()
