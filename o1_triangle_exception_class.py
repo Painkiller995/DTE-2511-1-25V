@@ -36,11 +36,11 @@ class Triangle:
             and self._side2 + self._side3 > self._side1
         )
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"Triangle with sides ({self._side1}, {self._side2}, {self._side3})"
 
 
-def main():
+def main() -> None:
     """Main function."""
     try:
         triangle = Triangle(3, 4, 5)  # Valid triangle
