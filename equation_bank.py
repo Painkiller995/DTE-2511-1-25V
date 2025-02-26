@@ -119,9 +119,7 @@ def view_result(student_name: str, student_data: dict[str, list[str] | list[int]
         student_name: The name of the student.
         student_data: A dictionary containing the student data.
     """
-
     clear_screen()
-
     print(f"Thank you {student_name} for participating in the session!\n")
     print("Here are your results:\n")
 
@@ -157,7 +155,6 @@ def student_session(student_equations: dict[str, dict[str, list[str] | list[int]
         student_equations: A dictionary containing the student names as keys and a dictionary as values.
     """
     clear_screen()
-
     print("Welcome to the Student Session!\n")
 
     while True:
