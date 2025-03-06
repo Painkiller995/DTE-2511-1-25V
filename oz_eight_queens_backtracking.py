@@ -1,3 +1,11 @@
+"""
+This module solves the Eight Queens Problem using backtracking algorithm.
+
+This implementation could be improved in the feature please check github for the latest version.
+https://github.com/Painkiller995/DTE-2511-1-25V
+
+"""
+
 import tkinter
 from tkinter import Frame, Label, PhotoImage
 
@@ -27,6 +35,8 @@ class EightQueens:
         self.board_frame = Frame(self._root)
         self.board_frame.pack(expand=True, fill="both")
 
+        self.solve(0)
+
         self.draw_board()
 
     def draw_board(self) -> None:
@@ -43,6 +53,31 @@ class EightQueens:
                     label = Label(frame, bg="red" if (i + j) % 2 else "white", borderwidth=1, relief="solid")
 
                 label.pack(expand=True, fill="both")
+
+    def is_safe(self, row: int, col: int) -> bool:
+        """Check if a queen can be placed at the given position."""
+        for i in range(row):
+            same_column = self.queens_positions[i] == col
+            same_diagonal = abs(i - row) == abs(self.queens_positions[i] - col)
+            if same_column or same_diagonal:
+                return False
+        return True
+
+    def solve(self, row: int) -> bool:
+        """Solve the Eight Queens Problem using backtracking."""
+        if row == self.board_size:
+            return True
+
+        for col in range(self.board_size):
+            if self.is_safe(row, col):
+                self.queens_positions[row] = col
+
+                if self.solve(row + 1):
+                    return True
+
+                self.queens_positions[row] = -1
+
+        return False
 
     def run(self) -> None:
         """Run the GUI."""
