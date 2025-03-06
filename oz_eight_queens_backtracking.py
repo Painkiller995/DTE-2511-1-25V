@@ -34,6 +34,9 @@ class EightQueens:
 
         self.queen_image = PhotoImage(file=QUEEN_IMAGE)
 
+        self.top_frame = Frame(self._root)
+        self.top_frame.pack(expand=True, fill="both")
+
         self.board_frame = Frame(self._root)
         self.board_frame.pack(expand=True, fill="both")
 
@@ -41,6 +44,12 @@ class EightQueens:
         """Draw the chess board with live updates for queens' positions."""
         for widget in self.board_frame.winfo_children():
             widget.destroy()  # Clear the previous board state
+
+        for widget in self.top_frame.winfo_children():
+            widget.destroy()
+
+        positions_label = Label(self.top_frame, text=f"Queens' Positions: {self.queens_positions}")
+        positions_label.pack()
 
         for i in range(self.board_size):
             for j in range(self.board_size):
@@ -51,7 +60,12 @@ class EightQueens:
                 if self.queens_positions[i] == j:
                     label = Label(frame, image=self.queen_image, borderwidth=1, relief="solid")
                 else:
-                    label = Label(frame, bg="red" if (i + j) % 2 else "white", borderwidth=1, relief="solid")
+                    label = Label(
+                        frame,
+                        bg="red" if (i + j) % 2 else "white",
+                        borderwidth=1,
+                        relief="solid",
+                    )
 
                 label.pack(expand=True, fill="both")
 
