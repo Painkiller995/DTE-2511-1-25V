@@ -6,6 +6,8 @@ https://github.com/Painkiller995/DTE-2511-1-25V
 
 """
 
+import threading
+import time
 import tkinter
 from tkinter import Frame, Label, PhotoImage
 
@@ -35,12 +37,11 @@ class EightQueens:
         self.board_frame = Frame(self._root)
         self.board_frame.pack(expand=True, fill="both")
 
-        self.solve(0)
-
-        self.draw_board()
-
     def draw_board(self) -> None:
-        """Draw the chess board."""
+        """Draw the chess board with live updates for queens' positions."""
+        for widget in self.board_frame.winfo_children():
+            widget.destroy()  # Clear the previous board state
+
         for i in range(self.board_size):
             for j in range(self.board_size):
                 frame = Frame(self.board_frame, width=self.square_size, height=self.square_size)
@@ -53,6 +54,8 @@ class EightQueens:
                     label = Label(frame, bg="red" if (i + j) % 2 else "white", borderwidth=1, relief="solid")
 
                 label.pack(expand=True, fill="both")
+
+        self._root.update_idletasks()  # Force GUI update
 
     def is_safe(self, desired_row: int, desired_col: int) -> bool:
         """
@@ -69,43 +72,49 @@ class EightQueens:
         for current_row in range(desired_row):  # in the first row current_row = 0, range will be skipped
             same_column = self.queens_positions[current_row] == desired_col
             if same_column:
-                # print(f"Collision with the queen at row {current_row} and column {queens_positions[current_row]}")
                 return False
 
             # To check the diagonal, we calculate the difference between the rows and the columns
             # If the difference is the same, then the queens are on the same diagonal
             same_diagonal = abs(current_row - desired_row) == abs(self.queens_positions[current_row] - desired_col)
             if same_diagonal:
-                # print(f"Collision with the queen at row {current_row} and column {queens_positions[current_row]}")
                 return False
 
         return True
 
     def solve(self, row: int) -> bool:
-        """Solve the Eight Queens Problem using backtracking."""
+        """Solve the Eight Queens Problem using backtracking with live drawing updates."""
 
-        # -----------------------------------------------
-        # End the recursion if all queens are placed
         if row == self.board_size:
             return True
-        # -----------------------------------------------
 
         for col in range(self.board_size):
             if self.is_safe(row, col):
-                # Place the queen
+                # Place the queen if the position is safe
                 self.queens_positions[row] = col
+
+                self._root.after(100, self.draw_board)  # Live draw after placing each queen
+                time.sleep(0.1)  # Simulate a delay to allow the GUI to update
 
                 # Recur to place the rest of the queens
                 if self.solve(row + 1):
                     return True
 
-                # Backtrack, reset the position of the queen
+                # Backtrack if the current queen placement does not lead to a solution
                 self.queens_positions[row] = -1
+
+                self._root.after(100, self.draw_board)  # Live draw after backtracking
+                time.sleep(0.1)  # Simulate a delay to allow the GUI to update
 
         return False
 
+    def solve_in_thread(self) -> None:
+        """Run the solver in a separate thread to prevent blocking the GUI."""
+        threading.Thread(target=self.solve, args=(0,)).start()
+
     def run(self) -> None:
         """Run the GUI."""
+        self.solve_in_thread()
         self._root.mainloop()
 
 
