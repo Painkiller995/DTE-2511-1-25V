@@ -54,27 +54,52 @@ class EightQueens:
 
                 label.pack(expand=True, fill="both")
 
-    def is_safe(self, row: int, col: int) -> bool:
-        """Check if a queen can be placed at the given position."""
-        for i in range(row):
-            same_column = self.queens_positions[i] == col
-            same_diagonal = abs(i - row) == abs(self.queens_positions[i] - col)
-            if same_column or same_diagonal:
+    def is_safe(self, desired_row: int, desired_col: int) -> bool:
+        """
+        Check if a queen can be placed at the given position without being attacked.
+        Args:
+            desired_row: The row index where the queen is to be placed.
+            desired_col: The column index where the queen is to be placed.
+        Returns:
+            bool: True if the position is safe for the queen, False otherwise.
+        The function checks for collisions with other queens already placed in previous rows.
+        It ensures that no two queens share the same column or diagonal.
+        """
+
+        for current_row in range(desired_row):  # in the first row current_row = 0, range will be skipped
+            same_column = self.queens_positions[current_row] == desired_col
+            if same_column:
+                # print(f"Collision with the queen at row {current_row} and column {queens_positions[current_row]}")
                 return False
+
+            # To check the diagonal, we calculate the difference between the rows and the columns
+            # If the difference is the same, then the queens are on the same diagonal
+            same_diagonal = abs(current_row - desired_row) == abs(self.queens_positions[current_row] - desired_col)
+            if same_diagonal:
+                # print(f"Collision with the queen at row {current_row} and column {queens_positions[current_row]}")
+                return False
+
         return True
 
     def solve(self, row: int) -> bool:
         """Solve the Eight Queens Problem using backtracking."""
+
+        # -----------------------------------------------
+        # End the recursion if all queens are placed
         if row == self.board_size:
             return True
+        # -----------------------------------------------
 
         for col in range(self.board_size):
             if self.is_safe(row, col):
+                # Place the queen
                 self.queens_positions[row] = col
 
+                # Recur to place the rest of the queens
                 if self.solve(row + 1):
                     return True
 
+                # Backtrack, reset the position of the queen
                 self.queens_positions[row] = -1
 
         return False
