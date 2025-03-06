@@ -13,9 +13,9 @@ import os
 import pickle
 from typing import Any, cast
 
-import vehicles
-from average_measurement import display_speeders, file_to_dict, find_speeders
-from vehicles import Vehicle
+import o1_vehicles
+from o1_average_measurement import display_speeders, file_to_dict, find_speeders
+from o1_vehicles import Vehicle
 
 FILE_NAME = "vehicles.dat"
 BOX_A_FILE = "box_a.txt"
@@ -135,7 +135,7 @@ def add_new_vehicle(choice: int, vehicles_dict: dict[str, Vehicle]) -> None:
     if choice == NEW_CAR:
         vehicle_info = get_vehicle_details()
         doors = get_input("number of doors", int)
-        new_car = vehicles.Car(*vehicle_info, doors)
+        new_car = o1_vehicles.Car(*vehicle_info, doors)
         vehicles_dict[new_car.regnr] = new_car
 
     elif choice == NEW_TRUCK:
@@ -147,13 +147,13 @@ def add_new_vehicle(choice: int, vehicles_dict: dict[str, Vehicle]) -> None:
                 break
             print("Invalid drive type. Must be 'F', 'B', or '4'.")
 
-        new_truck = vehicles.Truck(*vehicle_info, drive_type)
+        new_truck = o1_vehicles.Truck(*vehicle_info, drive_type)
         vehicles_dict[new_truck.regnr] = new_truck
 
     elif choice == NEW_SUV:
         vehicle_info = get_vehicle_details()
         capacity = get_input("passenger capacity", int)
-        new_suv = vehicles.SUV(*vehicle_info, capacity)
+        new_suv = o1_vehicles.SUV(*vehicle_info, capacity)
         vehicles_dict[new_suv.regnr] = new_suv
 
 

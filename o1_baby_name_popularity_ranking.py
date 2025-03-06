@@ -18,7 +18,7 @@ RECORD_END_YEAR = 2010
 BASE_URL = "https://liveexample.pearsoncmg.com/data/babynamesranking"
 
 
-def get_user_input() -> tuple:
+def get_user_input() -> tuple[str, str, str]:
     """
     Get user input for the year, gender, and name with validation.
 
@@ -30,14 +30,9 @@ def get_user_input() -> tuple:
     """
     while True:
         baby_birth_year = input("Enter the year: ")
-        if (
-            baby_birth_year.isdigit()
-            and RECORD_START_YEAR <= int(baby_birth_year) <= RECORD_END_YEAR
-        ):
+        if baby_birth_year.isdigit() and RECORD_START_YEAR <= int(baby_birth_year) <= RECORD_END_YEAR:
             break
-        print(
-            f"Invalid input! Enter a year between {RECORD_START_YEAR} and {RECORD_END_YEAR}."
-        )
+        print(f"Invalid input! Enter a year between {RECORD_START_YEAR} and {RECORD_END_YEAR}.")
 
     while True:
         baby_gender = input("Enter the gender (M/F): ").upper()
@@ -105,12 +100,10 @@ def find_name_ranking(data: list[str], gender: str, name: str) -> tuple[str, int
 if __name__ == "__main__":
     input_year, input_gender, input_name = get_user_input()
 
-    file_url = f"{BASE_URL}{input_year}.txt"
-    ranking_data = fetch_ranking_data(file_url)
+    FILE_URL = f"{BASE_URL}{input_year}.txt"
+    ranking_data = fetch_ranking_data(FILE_URL)
 
-    found_name, found_count, found_rank = find_name_ranking(
-        ranking_data, input_gender, input_name
-    )
+    found_name, found_count, found_rank = find_name_ranking(ranking_data, input_gender, input_name)
 
     print(
         f"{'Boy' if input_gender == 'M' else 'Girl'} name {found_name or input_name} "

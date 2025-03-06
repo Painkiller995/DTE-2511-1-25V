@@ -1,6 +1,6 @@
 import unittest
 
-from ring_buffer import RingBuffer
+from o2_ring_buffer import RingBuffer
 
 
 class TestRingBuffer(unittest.TestCase):
