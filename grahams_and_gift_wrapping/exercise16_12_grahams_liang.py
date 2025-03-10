@@ -160,16 +160,16 @@ def discard_ties(points: list[tuple[float, float]]) -> list[tuple[float, float]]
 # Example usage
 if __name__ == "__main__":
     # Example set of points
-    example_points = [
-        [5.0, 2.0],
-        [1.0, 1.0],
-        [4.0, 2.0],
-        [6.0, 4.0],
-        [4.0, 3.0],
-        [5.0, 6.0],
-        [2.0, 4.0],
-        [3.0, 6.0],
-        [1.0, 3.0],
+    example_points: list[tuple[float, float]] = [
+        (5.0, 2.0),
+        (1.0, 1.0),
+        (4.0, 2.0),
+        (6.0, 4.0),
+        (4.0, 3.0),
+        (5.0, 6.0),
+        (2.0, 4.0),
+        (3.0, 6.0),
+        (1.0, 3.0),
     ]
 
     # Convex hull for example points
