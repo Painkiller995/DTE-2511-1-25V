@@ -2,6 +2,7 @@
 This module provides a function to draw points on a grid using integers.
 """
 
+import random
 import time
 from typing import Callable
 
@@ -53,23 +54,15 @@ def measure_time(algorithm: Callable, points: list[tuple[float, float]]) -> floa
     return end_time - start_time
 
 
-# Example usage
-example_points: list[tuple[float, float]] = [
-    (5.0, 2.0),
-    (1.0, 1.0),
-    (4.0, 2.0),
-    (6.0, 4.0),
-    (4.0, 3.0),
-    (5.0, 6.0),
-    (2.0, 4.0),
-    (3.0, 6.0),
-    (1.0, 3.0),
-]
+random_points: list[tuple[float, float]] = []
 
-draw_points(example_points)
+for _ in range(5000):
+    x, y = random.randint(0, 10), random.randint(0, 10)
+    random_points.append((x, y))
 
-time_grahams = measure_time(get_convex_hull_grahams, example_points)
+
+time_grahams = measure_time(get_convex_hull_grahams, random_points)
 print(f"Time taken by Graham's scan: {time_grahams:.6f} seconds")
 
-time_gift_wrapping = measure_time(get_convex_hull_gift_wrapping, example_points)
+time_gift_wrapping = measure_time(get_convex_hull_gift_wrapping, random_points)
 print(f"Time taken by gift wrapping: {time_gift_wrapping:.6f} seconds")

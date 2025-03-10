@@ -5,6 +5,7 @@
         "padx",
         "pady",
         "regnr",
+        "timsort",
         "validatecommand"
     ]
 }

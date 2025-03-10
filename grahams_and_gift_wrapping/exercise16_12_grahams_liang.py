@@ -39,9 +39,8 @@ def remove_concave_points(
         top = stack[-1]
         next_to_top = stack[-2]
 
-        if (
-            which_side(next_to_top[0], next_to_top[1], top[0], top[1], points[index][0], points[index][1]) <= 0
-        ):  # on the right of the line from next_to_top to top
+        if which_side(next_to_top[0], next_to_top[1], top[0], top[1], points[index][0], points[index][1]) <= 0:
+            # on the right of the line from next_to_top to top
             # pop the top element off the stack
             stack.pop()
         else:
@@ -91,7 +90,10 @@ def place_rightmost_lowest_point(points: list[tuple[float, float]]) -> None:
         points[0], points[rightmost_index] = points[rightmost_index], points[0]
 
 
-# sort_points_on_angles points
+# The current implementation of the sort_points_on_angles function uses the selection sort algorithm,
+# which has a time complexity of O(n^2). This is inefficient for large datasets.
+# To optimize performance, we replace selection sort with Python's built-in sorted() function,
+# which uses Timsort and provides a time complexity of O(n log n).
 def sort_points_on_angles(points: list[tuple[float, float]]) -> None:
     for i in range(1, len(points) - 1):
         # Find the minimum in the points[i..len(points)-1]
