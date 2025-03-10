@@ -2,13 +2,19 @@
 This module provides a function to draw points on a grid using integers.
 """
 
+import time
+from typing import Callable
+
+from exercise16_12_grahams_liang import get_convex_hull as get_convex_hull_grahams
+from exercise_16_11_gift_wrapping_liang import get_convex_hull as get_convex_hull_gift_wrapping
+
 
 def draw_points(points: list[tuple[float, float]]) -> None:
     """
-    Draws the points on a grid using integers.
+    Draws the points on a grid using integers in the console.
 
     Args:
-        points (list[tuple[float, float]]): A list of points where each point is represented by a tuple of two floats [x, y].
+        points: A list of points represented as tuples (x, y).
     """
     max_x, max_y = 0, 0
 
@@ -32,6 +38,21 @@ def draw_points(points: list[tuple[float, float]]) -> None:
         print()
 
 
+def measure_time(algorithm: Callable, points: list[tuple[float, float]]) -> float:
+    """
+    Measures the time taken to execute the algorithm on the given points.
+
+    Args:
+        algorithm: The algorithm to measure.
+        points: The points to run the algorithm on.
+    """
+
+    start_time = time.time()
+    algorithm(points)
+    end_time = time.time()
+    return end_time - start_time
+
+
 # Example usage
 example_points: list[tuple[float, float]] = [
     (5.0, 2.0),
@@ -46,3 +67,9 @@ example_points: list[tuple[float, float]] = [
 ]
 
 draw_points(example_points)
+
+time_grahams = measure_time(get_convex_hull_grahams, example_points)
+print(f"Time taken by Graham's scan: {time_grahams:.6f} seconds")
+
+time_gift_wrapping = measure_time(get_convex_hull_gift_wrapping, example_points)
+print(f"Time taken by gift wrapping: {time_gift_wrapping:.6f} seconds")
