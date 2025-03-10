@@ -155,3 +155,24 @@ def discard_ties(points: list[tuple[float, float]]) -> list[tuple[float, float]]
         i = k
 
     return result
+
+
+# Example usage
+if __name__ == "__main__":
+    # Example set of points
+    example_points = [
+        [5.0, 2.0],
+        [1.0, 1.0],
+        [4.0, 2.0],
+        [6.0, 4.0],
+        [4.0, 3.0],
+        [5.0, 6.0],
+        [2.0, 4.0],
+        [3.0, 6.0],
+        [1.0, 3.0],
+    ]
+
+    # Convex hull for example points
+    convex_hull_example = get_convex_hull(example_points)
+    print("\nThe convex hull for example points is:")
+    print(convex_hull_example)
