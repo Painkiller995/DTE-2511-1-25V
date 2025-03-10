@@ -54,15 +54,30 @@ def measure_time(algorithm: Callable, points: list[tuple[float, float]]) -> floa
     return end_time - start_time
 
 
-random_points: list[tuple[float, float]] = []
+def generate_random_list(n: int) -> list[tuple[float, float]]:
+    """
+    Generates a list of n random points.
 
-for _ in range(5000):
-    x, y = random.randint(0, 10), random.randint(0, 10)
-    random_points.append((x, y))
+    Args:
+        n: The number of points to generate.
+    """
+    return [(random.random(), random.random()) for _ in range(n)]
 
 
-time_grahams = measure_time(get_convex_hull_grahams, random_points)
-print(f"Time taken by Graham's scan: {time_grahams:.6f} seconds")
+def main() -> None:
+    """
+    Main function to compare the performance of Graham's Scan and Gift Wrapping algorithms.
+    """
+    sizes = [100, 1000]
+    for size in sizes:
+        random_points = generate_random_list(size)
+        time_grahams = measure_time(get_convex_hull_grahams, random_points)
+        time_gift_wrapping = measure_time(get_convex_hull_gift_wrapping, random_points)
+        print(f"Size: {size}")
+        print(f"Graham's Scan: {time_grahams:.6f} seconds")
+        print(f"Gift Wrapping: {time_gift_wrapping:.6f} seconds")
+        print()
 
-time_gift_wrapping = measure_time(get_convex_hull_gift_wrapping, random_points)
-print(f"Time taken by gift wrapping: {time_gift_wrapping:.6f} seconds")
+
+if __name__ == "__main__":
+    main()
