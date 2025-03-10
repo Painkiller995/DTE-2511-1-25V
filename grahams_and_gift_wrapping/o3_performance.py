@@ -1,44 +1,48 @@
 """
-This module provides a function to draw points on a grid.
+This module provides a function to draw points on a grid using integers.
 """
 
 
-def draw_points(points: list[list[float]]) -> None:
+def draw_points(points: list[tuple[float, float]]) -> None:
     """
-    Draws the given points on a grid.
+    Draws the points on a grid using integers.
 
     Args:
-        points (list[list[float]]): A list of points where each point is represented by a list of two floats [x, y].
+        points (list[tuple[float, float]]): A list of points where each point is represented by a tuple of two floats [x, y].
     """
-    max_x_cord: int = 0
-    max_y_cord: int = 0
+    max_x, max_y = 0, 0
 
-    for point in points:
-        if max_x_cord < point[0]:
-            max_x_cord = int(point[0])
-        if max_y_cord < point[1]:
-            max_y_cord = int(point[1])
+    int_points = []
+    for x, y in points:
+        x_int, y_int = int(x), int(y)
+        int_points.append((x_int, y_int))
+        if x_int > max_x:
+            max_x = x_int
+        if y_int > max_y:
+            max_y = y_int
 
-    for y in range(max_y_cord, -1, -1):
-        for x in range(max_x_cord + 1):
-            point = [float(x), float(y)]
-            if point in points:
+    point_set = set(int_points)
+
+    for y in range(max_y, -1, -1):
+        for x in range(0, max_x + 1):
+            if (x, y) in point_set:  # using set O(1) lookup
                 print(f" {x},{y} ", end="")
             else:
                 print("     ", end="")
         print()
 
 
-example_points = [
-    [5.0, 2.0],
-    [1.0, 1.0],
-    [4.0, 2.0],
-    [6.0, 4.0],
-    [4.0, 3.0],
-    [5.0, 6.0],
-    [2.0, 4.0],
-    [3.0, 6.0],
-    [1.0, 3.0],
+# Example usage
+example_points: list[tuple[float, float]] = [
+    (5.0, 2.0),
+    (1.0, 1.0),
+    (4.0, 2.0),
+    (6.0, 4.0),
+    (4.0, 3.0),
+    (5.0, 6.0),
+    (2.0, 4.0),
+    (3.0, 6.0),
+    (1.0, 3.0),
 ]
 
 draw_points(example_points)
