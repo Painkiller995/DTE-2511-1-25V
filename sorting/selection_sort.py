@@ -1,5 +1,5 @@
 """
-This module implements the Bubble Sort algorithm.
+This module implements the Selection Sort algorithm.
 
 This implementation could be improved in the feature please check github for the latest version.
 https://github.com/Painkiller995/DTE-2511-1-25V
@@ -9,7 +9,7 @@ https://github.com/Painkiller995/DTE-2511-1-25V
 
 def sort(arr: list[int]) -> None:
     """
-    Sort the list using the Bubble Sort algorithm.
+    Sort the list using the Selection Sort algorithm.
 
     Args:
         - arr: The list to be sorted.
@@ -22,14 +22,13 @@ def sort(arr: list[int]) -> None:
     # Assuming the array is already sorted.
     is_sorted = True
 
-    for i in range(number_of_elements - 1):
-        for j in range(number_of_elements - i - 1):
-            if arr[j] > arr[j + 1]:
-                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+    for i in range(number_of_elements):
+        for j in range(number_of_elements):
+            if arr[j] > arr[i]:
+                arr[i], arr[j] = arr[j], arr[i]
                 is_sorted = False
 
-        # If the array is already sorted, break the loop.
-        if is_sorted:
+        if is_sorted:  # If the array is already sorted, break the loop.
             break
 
 
