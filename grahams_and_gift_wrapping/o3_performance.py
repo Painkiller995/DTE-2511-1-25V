@@ -4,7 +4,7 @@ This module provides a function to draw points on a grid using integers.
 
 import random
 import time
-from typing import Callable
+from collections.abc import Callable
 
 from exercise16_12_grahams_liang import get_convex_hull as get_convex_hull_grahams
 from exercise_16_11_gift_wrapping_liang import get_convex_hull as get_convex_hull_gift_wrapping
