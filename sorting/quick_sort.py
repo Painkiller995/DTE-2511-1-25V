@@ -31,7 +31,7 @@ def _sort(arr: list[int], start: int, end: int) -> None:
         return
 
     # Partition the array
-    boundary = partition(arr, start, end)
+    boundary = _partition(arr, start, end)
 
     # Sort left
     _sort(arr, start, boundary - 1)
@@ -40,7 +40,7 @@ def _sort(arr: list[int], start: int, end: int) -> None:
     _sort(arr, boundary + 1, end)
 
 
-def partition(arr: list[int], start: int, end: int) -> int:
+def _partition(arr: list[int], start: int, end: int) -> int:
     """
     Partition the array for the Quick Sort algorithm.
 
