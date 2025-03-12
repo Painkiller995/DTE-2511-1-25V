@@ -45,9 +45,9 @@ def _partition(arr: list[int], start: int, end: int) -> int:
     Partition the array for the Quick Sort algorithm.
 
     Args:
-        - arr (list[int]): The list to be partitioned.
-        - start (int): The starting index of the partition.
-        - end (int): The ending index of the partition.
+        - arr: The list to be partitioned.
+        - start: The starting index of the partition.
+        - end: The ending index of the partition.
 
     Returns:
         int: The index of the pivot element after partition.
