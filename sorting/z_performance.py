@@ -12,6 +12,7 @@ import time
 from bubble_sort import sort as bubble_sort
 from insertion_sort import sort as insertion_sort
 from merge_sort import sort as merge_sort
+from quick_sort import sort as quick_sort
 from selection_sort import sort as selection_sort
 
 
@@ -24,6 +25,7 @@ def compare_performance() -> None:
         "Insertion Sort": insertion_sort,
         "Selection Sort": selection_sort,
         "Merge Sort": merge_sort,
+        "Quick Sort": quick_sort,
     }
 
     data = [random.randint(0, 1000) for _ in range(10000)]
