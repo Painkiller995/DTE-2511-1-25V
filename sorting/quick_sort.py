@@ -58,8 +58,10 @@ def _partition(arr: list[int], start: int, end: int) -> int:
         if arr[i] <= pivot:
             boundary += 1
             arr[i], arr[boundary] = arr[boundary], arr[i]
-    # Swap the pivot element to its correct position
+
+    # Place the pivot in its correct position
     arr[boundary + 1], arr[end] = arr[end], arr[boundary + 1]
+
     return boundary + 1  # Return the correct pivot index
 
 
