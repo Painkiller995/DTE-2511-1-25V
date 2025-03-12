@@ -14,12 +14,12 @@ def sort(arr: list[int]) -> None:
     Args:
         - arr: The list to be sorted.
     """
-    _sort(arr, 0, len(arr) - 1)  # Corrected end index
+    _sort(arr, 0, len(arr) - 1)
 
 
 def _sort(arr: list[int], start: int, end: int) -> None:
     """
-    Sort the list using the Quick Sort algorithm.
+    Private helper function to sort the list using the Quick Sort algorithm.
 
     Args:
         - arr: The list to be sorted.
