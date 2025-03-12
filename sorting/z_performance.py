@@ -14,6 +14,7 @@ from insertion_sort import sort as insertion_sort
 from merge_sort import sort as merge_sort
 from quick_sort import sort as quick_sort
 from selection_sort import sort as selection_sort
+from tim_sort import sort as tim_sort
 
 
 def compare_performance() -> None:
@@ -26,6 +27,7 @@ def compare_performance() -> None:
         "Selection Sort": selection_sort,
         "Merge Sort": merge_sort,
         "Quick Sort": quick_sort,
+        "Tim Sort": tim_sort,
     }
 
     data = [random.randint(0, 1000) for _ in range(10000)]
