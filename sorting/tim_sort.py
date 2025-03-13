@@ -6,27 +6,7 @@ https://github.com/Painkiller995/DTE-2511-1-25V
 
 """
 
-
-def insertion_sort(arr: list[int], start: int, end: int) -> None:
-    """
-    Sort the list using the Insertion Sort algorithm.
-
-    Args:
-        - arr: The list to be sorted.
-        - start: The starting index of the partition.
-        - end: The ending index of the partition.
-
-    Returns:
-        None: The list is sorted in-place.
-    """
-    for i in range(start + 1, end + 1):
-        current_element = arr[i]
-        j = i - 1
-
-        while j >= start and current_element < arr[j]:
-            arr[j + 1] = arr[j]
-            j -= 1
-        arr[j + 1] = current_element
+from insertion_sort import sort as insertion_sort
 
 
 def merge_sort(arr: list[int], start: int, middle: int, end: int) -> None:
