@@ -1,5 +1,6 @@
 """
 This module implements the Quick Sort algorithm.
+Time Complexity: O(n^2) in the worst case, O(n log n) on average.
 
 This implementation could be improved in the feature please check github for the latest version.
 https://github.com/Painkiller995/DTE-2511-1-25V
