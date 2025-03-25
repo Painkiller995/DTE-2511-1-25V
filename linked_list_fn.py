@@ -215,12 +215,11 @@ class LinkedList:
         current = self._head
 
         for _ in range(self._size):
-            if current is None:
-                result += "]"
-                break
+            if current:
+                result += str(current.element)
+                current = current.next
 
-            result += str(current.element + ", ")
-            current = current.next
+            result += "]" if current is None else ", "
 
         return result
 
