@@ -11,6 +11,33 @@ https://github.com/Painkiller995/DTE-2511-1-25V
 from typing import Any
 
 
+class Node:
+    """
+    A node in a linked list
+    """
+
+    def __init__(self, e: Any):
+        self.element: Any = e
+        self.next: Node | None
+
+
+class LinkedListIterator:
+    """
+    An iterator for a linked list
+    """
+
+    def __init__(self, head: Node | None):
+        self._current: Node | None = head
+
+    def __next__(self) -> Any:
+        if self._current is None:
+            raise StopIteration
+        else:
+            element = self._current.element
+            self._current = self._current.next
+            return element
+
+
 class LinkedList:
     """
     A linked list implementation
@@ -204,70 +231,134 @@ class LinkedList:
         self._head = self._tail = None
         self._size = 0
 
-    # Return true if this list contains the element e
-    def contains(self, e):
-        print("Implementation left as an exercise")
-        return True
+    def contains(self, e: Any) -> bool:
+        """
+        Return true if this list contains the element e
 
-    # Remove the element and return true if the element is in the list
-    def remove(self, e):
-        print("Implementation left as an exercise")
-        return True
+        Args:
+            - e: The element to check
 
-    # Return the element from this list at the specified index
-    def get(self, index):
-        print("Implementation left as an exercise")
-        return None
+        Returns:
+            - True if the element is in the list, False otherwise
+        """
+        current = self._head
+        for _ in range(self._size):
+            if current is None:
+                return False
+            elif current.element == e:
+                return True
+            current = current.next
 
-    # Return the index of the head matching element in this list.
-    # Return -1 if no match.
-    def index_of(self, e):
-        print("Implementation left as an exercise")
-        return 0
+        return False
 
-    # Return the index of the last matching element in this list
-    #  Return -1 if no match.
-    def last_index_of(self, e):
-        print("Implementation left as an exercise")
-        return 0
+    def remove(self, e: Any) -> bool:
+        """
+        Remove the element and return true if the element is in the list
 
-    # Replace the element at the specified position in this list
-    #  with the specified element.
-    def set(self, index, e):
-        print("Implementation left as an exercise")
-        return None
+        Args:
+            - e: The element to remove
 
-    # Return elements via indexer, can use list[0] to get the first element etc
-    def __getitem__(self, index):
+        Returns:
+            - True if the element was removed, False otherwise
+        """
+        if self.contains(e):
+            self.remove_at(self.index_of(e))
+            return True
+        else:
+            return False
+
+    def get(self, index: int) -> Any:
+        """
+        Return the element from this list at the specified index
+
+        Args:
+            - index: The index of the element to return
+
+        Returns:
+            - The element at the specified index
+        """
+        if index < 0 or index >= self._size:
+            return None
+
+        current = self._head
+        for _ in range(index):
+            if current:
+                current = current.next
+
+    def index_of(self, e: Any) -> int:
+        """
+        Return the index of the head matching element in this list.
+
+        Args:
+            - e: The element to find
+
+        Returns:
+            - The index of the element in the list
+        """
+        current = self._head
+        for i in range(self._size):
+            if current is None:
+                return -1
+            elif current.element == e:
+                return i
+            current = current.next
+
+        return -1
+
+    def last_index_of(self, e: Any) -> int:
+        """
+        Return the index of the last matching element in this list.
+
+        Args:
+            - e: The element to find
+
+        Returns:
+            - The index of the last element in the list
+        """
+        current = self._head
+        last_index = -1
+        for i in range(self._size):
+            if current is None:
+                return last_index
+            elif current.element == e:
+                last_index = i
+            current = current.next
+
+        return last_index
+
+    def set(self, index: int, e: Any) -> Any:
+        """
+        Replace the element at the specified position in this list with the specified element.
+        Args:
+            - index: The index of the element to replace
+            - e: The element to be stored at the specified position
+
+        Returns:
+            - The element previously at the specified position
+        """
+        if index < 0 or index >= self._size:
+            return None
+
+        current = self._head
+        for _ in range(index):
+            if current:
+                current = current.next
+
+        if current is None:
+            return None
+
+        temp = current.element
+        current.element = e
+        return temp
+
+    def __getitem__(self, index: int) -> Any:
+        """
+        Return the element from this list at the specified index
+        """
         return self.get(index)
 
-    # Return an iterator for a linked list
-    def __iter__(self):
+    def __iter__(self) -> LinkedListIterator:
+        """
+        Return an iterator for the list
+        """
         return LinkedListIterator(self._head)
-
-
-class Node:
-    """
-    A node in a linked list
-    """
-
-    def __init__(self, e: Any):
-        self.element: Any = e
-        self.next: Node | None
-
-
-class LinkedListIterator:
-    """
-    An iterator for a linked list
-    """
-
-    def __init__(self, head: Node):
-        self._current = head
-
-    def __next__(self) -> Any:
-        if self._current is None:
-            raise StopIteration
-        else:
-            element = self._current.element
-            self._current = self._current.next
-            return element
