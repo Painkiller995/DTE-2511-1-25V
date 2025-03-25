@@ -18,7 +18,7 @@ class Node:
 
     def __init__(self, e: Any):
         self.element: Any = e
-        self.next: Node | None
+        self.next: Node | None = None
 
 
 class LinkedListIterator:
@@ -242,13 +242,10 @@ class LinkedList:
             - True if the element is in the list, False otherwise
         """
         current = self._head
-        for _ in range(self._size):
-            if current is None:
-                return False
-            elif current.element == e:
+        while current:
+            if current.element == e:
                 return True
             current = current.next
-
         return False
 
     def remove(self, e: Any) -> bool:
@@ -284,6 +281,8 @@ class LinkedList:
         for _ in range(index):
             if current:
                 current = current.next
+
+        return current.element if current else None
 
     def index_of(self, e: Any) -> int:
         """
