@@ -50,7 +50,7 @@ def replace_text_in_file(file_name: str, old_text: str, new_text: str) -> None:
         - new_text: The text to replace with.
     """
     try:
-        with open(file_name, "r", encoding=FILE_ENCODING) as file:
+        with open(file_name, encoding=FILE_ENCODING) as file:
             lines = file.readlines()
 
         modified_lines = [line.replace(old_text, new_text) for line in lines]
