@@ -1,42 +1,16 @@
 """
-This module provides a function to draw points on a grid using integers.
+The current implementation of the sort_on_angles function uses the selection sort algorithm,
+which has a time complexity of O(n^2). This is inefficient for large datasets.
+To optimize performance, we replace selection sort with Python's built-in sorted() function,
+which uses Timsort and provides a time complexity of O(n log n).
 """
 
 import random
 import time
 from collections.abc import Callable
 
-from exercise16_12_grahams_liang import get_convex_hull as get_convex_hull_grahams
-from exercise_16_11_gift_wrapping_liang import get_convex_hull as get_convex_hull_gift_wrapping
-
-
-def draw_points(points: list[tuple[float, float]]) -> None:
-    """
-    Draws the points on a grid using integers in the console.
-
-    Args:
-        points: A list of points represented as tuples (x, y).
-    """
-    max_x, max_y = 0, 0
-
-    int_points = []
-    for x, y in points:
-        x_int, y_int = int(x), int(y)
-        int_points.append((x_int, y_int))
-        if x_int > max_x:
-            max_x = x_int
-        if y_int > max_y:
-            max_y = y_int
-
-    point_set = set(int_points)
-
-    for y in range(max_y, -1, -1):
-        for x in range(0, max_x + 1):
-            if (x, y) in point_set:  # using set O(1) lookup
-                print(f" {x},{y} ", end="")
-            else:
-                print("     ", end="")
-        print()
+from Exercise16_11_gift_wrapping_liang import get_convex_hull as get_convex_hull_gift_wrapping
+from Exercise16_12_grahams_liang import get_convex_hull as get_convex_hull_grahams
 
 
 def measure_time(algorithm: Callable, points: list[tuple[float, float]]) -> float:
