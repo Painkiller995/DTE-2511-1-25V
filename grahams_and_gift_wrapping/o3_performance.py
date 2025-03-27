@@ -35,7 +35,7 @@ def generate_random_list(n: int) -> list[tuple[float, float]]:
     Args:
         n: The number of points to generate.
     """
-    return [(random.random(), random.random()) for _ in range(n)]
+    return [(random.uniform(0, 100), random.uniform(0, 100)) for _ in range(n)]
 
 
 def main() -> None:
