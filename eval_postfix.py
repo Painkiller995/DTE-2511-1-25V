@@ -56,10 +56,17 @@ def evaluate_postfix(expression: str) -> int:
     return stack.pop()
 
 
-# Example usage
-postfix_expression = input("Enter a postfix expression: ")
-try:
-    result = evaluate_postfix(postfix_expression)
-    print("Result:", result)
-except Exception as e:
-    print("Error:", e)
+def main() -> None:
+    """
+    Main function for the postfix expression evaluation program.
+    """
+    postfix_expression = input("Enter a postfix expression: ")
+    try:
+        result = evaluate_postfix(postfix_expression)
+        print("Result:", result)
+    except Exception as e:
+        print("Error:", e)
+
+
+if __name__ == "__main__":
+    main()
