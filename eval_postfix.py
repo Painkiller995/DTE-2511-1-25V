@@ -21,7 +21,6 @@ def evaluate_postfix(expression: str) -> int:
 
     for token in expression.split():
         if token.isdigit():  # If token is a number, push it on the stack
-            print("Push on stack:", token)
             stack.append(int(token))
 
         elif token in operators:
@@ -32,31 +31,24 @@ def evaluate_postfix(expression: str) -> int:
             a = stack.pop()
 
             if token == "+":
-                print("Add and push result on stack:", a, b)
                 stack.append(a + b)
 
             elif token == "-":
-                print("Subtract and push result on stack:", a, b)
                 stack.append(a - b)
 
             elif token == "*":
-                print("Multiply and push result on stack:", a, b)
                 stack.append(a * b)
 
             elif token == "/":
                 if b == 0:
                     raise ZeroDivisionError("Division by zero")
-                print("Divide and push result on stack:", a, b)
                 stack.append(a // b)  # Integer division
 
             elif token == "^":
-                print("Raise to power and push result on stack:", a, b)
                 stack.append(a**b)
 
         else:
             raise ValueError(f"Invalid token: {token}")
-
-        print("Stack:", stack)
 
     if len(stack) != 1:
         raise ValueError("Invalid postfix expression")
