@@ -1,8 +1,12 @@
 """
-This module implements the Quick Sort algorithm.
+This module implements the Quick Sort algorithm with an improved pivot selection strategy.
+
 Time Complexity: O(n^2) in the worst case, O(n log n) on average.
 
-This implementation could be improved in the feature please check github for the latest version.
+This implementation chooses the pivot as the median of three (first, middle, last elements),
+which helps avoid worst-case performance on already sorted or nearly sorted lists.
+
+Check GitHub for the latest version:
 https://github.com/Painkiller995/DTE-2511-1-25V
 
 """
@@ -27,23 +31,45 @@ def _sort(arr: list[int], start: int, end: int) -> None:
         - start: The starting index of the partition.
         - end: The ending index of the partition.
     """
-
     if start >= end:
         return
 
-    # Partition the array
+    # Partition the array and get the pivot index
     boundary = _partition(arr, start, end)
 
-    # Sort left
+    # Recursively sort elements before and after partition
     _sort(arr, start, boundary - 1)
-
-    # Sort right
     _sort(arr, boundary + 1, end)
+
+
+def _median_of_three(arr: list[int], start: int, end: int) -> int:
+    """
+    Selects the pivot using the median-of-three method.
+    Picks the median of the first, middle, and last elements.
+
+    Args:
+        - arr: The list of numbers.
+        - start: The starting index.
+        - end: The ending index.
+
+    Returns:
+        int: The index of the median-of-three pivot.
+    """
+    mid = (start + end) // 2  # The middle index
+    a, b, c = arr[start], arr[mid], arr[end]  # The three elements
+
+    # Determine the median value and return its index
+    if (a <= b <= c) or (c <= b <= a):
+        return mid
+    elif (b <= a <= c) or (c <= a <= b):
+        return start
+    else:
+        return end
 
 
 def _partition(arr: list[int], start: int, end: int) -> int:
     """
-    Partition the array for the Quick Sort algorithm.
+    Partition the array using the median-of-three pivot selection.
 
     Args:
         - arr: The list to be partitioned.
@@ -53,7 +79,13 @@ def _partition(arr: list[int], start: int, end: int) -> int:
     Returns:
         int: The index of the pivot element after partition.
     """
-    pivot = arr[end]
+    # Select pivot using median-of-three method
+    pivot_index = _median_of_three(arr, start, end)
+    pivot = arr[pivot_index]
+
+    # Swap pivot with the last element (standard Quicksort practice)
+    arr[pivot_index], arr[end] = arr[end], arr[pivot_index]
+
     boundary = start - 1
     for i in range(start, end):
         if arr[i] <= pivot:
