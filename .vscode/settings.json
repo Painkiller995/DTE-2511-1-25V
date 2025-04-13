@@ -8,5 +8,11 @@
         "timsort",
         "validatecommand",
         "ZÆØÅ"
-    ]
+    ],
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false
+    }
 }
