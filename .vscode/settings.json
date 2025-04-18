@@ -2,8 +2,11 @@
     "cSpell.words": [
         "bioinformatics",
         "cust",
+        "inorder",
         "padx",
         "pady",
+        "postorder",
+        "preorder",
         "regnr",
         "timsort",
         "validatecommand",

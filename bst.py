@@ -7,7 +7,7 @@ class BST:
     def search(self, e):
         current = self.root  # Start from the root
 
-        while current != None:
+        while current is not None:
             if e < current.element:
                 current = current.left
             elif e > current.element:
@@ -20,13 +20,13 @@ class BST:
     # Insert element e into the binary search tree
     # Return True if the element is inserted successfully
     def insert(self, e):
-        if self.root == None:
-            self.root = self.createNewNode(e)  # Create a new root
+        if self.root is None:
+            self.root = self.create_new_node(e)  # Create a new root
         else:
             # Locate the parent node
             parent = None
             current = self.root
-            while current != None:
+            while current is not None:
                 if e < current.element:
                     parent = current
                     current = current.left
@@ -38,60 +38,60 @@ class BST:
 
             # Create the new node and attach it to the parent node
             if e < parent.element:
-                parent.left = self.createNewNode(e)
+                parent.left = self.create_new_node(e)
             else:
-                parent.right = self.createNewNode(e)
+                parent.right = self.create_new_node(e)
 
         self.size += 1  # Increase tree size
         return True  # Element inserted
 
     # Create a new TreeNode for element e
-    def createNewNode(self, e):
+    def create_new_node(self, e):
         return TreeNode(e)
 
     # Return the size of the tree
-    def getSize(self):
+    def get_size(self):
         return self.size
 
     # Inorder traversal from the root
     def inorder(self):
-        self.inorderHelper(self.root)
+        self.inorder_helper(self.root)
 
     # Inorder traversal from a subtree
-    def inorderHelper(self, r):
-        if r != None:
-            self.inorderHelper(r.left)
+    def inorder_helper(self, r):
+        if r is not None:
+            self.inorder_helper(r.left)
             print(r.element, end=" ")
-            self.inorderHelper(r.right)
+            self.inorder_helper(r.right)
 
     # Postorder traversal from the root
     def postorder(self):
-        self.postorderHelper(self.root)
+        self.postorder_helper(self.root)
 
     # Postorder traversal from a subtree
-    def postorderHelper(self, root):
-        if root != None:
-            self.postorderHelper(root.left)
-            self.postorderHelper(root.right)
+    def postorder_helper(self, root):
+        if root is not None:
+            self.postorder_helper(root.left)
+            self.postorder_helper(root.right)
             print(root.element, end=" ")
 
     # Preorder traversal from the root
     def preorder(self):
-        self.preorderHelper(self.root)
+        self.preorder_helper(self.root)
 
     # Preorder traversal from a subtree
-    def preorderHelper(self, root):
-        if root != None:
+    def preorder_helper(self, root):
+        if root is not None:
             print(root.element, end=" ")
-            self.preorderHelper(root.left)
-            self.preorderHelper(root.right)
+            self.preorder_helper(root.left)
+            self.preorder_helper(root.right)
 
     # Returns a path from the root leading to the specified element
     def path(self, e):
         list = []
         current = self.root  # Start from the root
 
-        while current != None:
+        while current is not None:
             list.append(current)  # Add the node to the list
             if e < current.element:
                 current = current.left
@@ -109,7 +109,7 @@ class BST:
         # Locate the node to be deleted and its parent node
         parent = None
         current = self.root
-        while current != None:
+        while current is not None:
             if e < current.element:
                 parent = current
                 current = current.left
@@ -119,13 +119,13 @@ class BST:
             else:
                 break  # Element is in the tree pointed by current
 
-        if current == None:
+        if current is None:
             return False  # Element is not in the tree
 
         # Case 1: current has no left children
-        if current.left == None:
+        if current.left is None:
             # Connect the parent with the right child of the current node
-            if parent == None:
+            if parent is None:
                 self.root = current.right
             else:
                 if e < parent.element:
@@ -134,30 +134,30 @@ class BST:
                     parent.right = current.right
         else:
             # Case 2: The current node has a left child
-            # Locate the rightmost node in the left subtree of
+            # Locate the right_most node in the left subtree of
             # the current node and also its parent
-            parentOfRightMost = current
-            rightMost = current.left
+            parent_of_right_most = current
+            right_most = current.left
 
-            while rightMost.right != None:
-                parentOfRightMost = rightMost
-                rightMost = rightMost.right  # Keep going to the right
+            while right_most.right is not None:
+                parent_of_right_most = right_most
+                right_most = right_most.right  # Keep going to the right
 
-            # Replace the element in current by the element in rightMost
-            current.element = rightMost.element
+            # Replace the element in current by the element in right_most
+            current.element = right_most.element
 
-            # Eliminate rightmost node
-            if parentOfRightMost.right == rightMost:
-                parentOfRightMost.right = rightMost.left
+            # Eliminate right_most node
+            if parent_of_right_most.right == right_most:
+                parent_of_right_most.right = right_most.left
             else:
-                # Special case: parentOfRightMost == current
-                parentOfRightMost.left = rightMost.left
+                # Special case: parent_of_right_most == current
+                parent_of_right_most.left = right_most.left
 
         self.size -= 1
         return True  # Element deleted
 
     # Return true if the tree is empty
-    def isEmpty(self):
+    def is_empty(self):
         return self.size == 0
 
     # Remove all elements from the tree
@@ -166,7 +166,7 @@ class BST:
         self.size == 0
 
     # Return the root of the tree
-    def getRoot(self):
+    def get_root(self):
         return self.root
 
 
