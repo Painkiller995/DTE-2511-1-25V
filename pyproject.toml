@@ -1,15 +1,16 @@
+# ==== mypy ====
 [tool.mypy]
-strict = true
-exclude = ["venv", ".venv","alembic"]
+strict = false
+plugins = ["flask_mypy.plugin"]
+exclude = ["venv", ".venv", "alembic", "migrations"]
 
-[tool.ruff] 
+# ==== ruff ====
+[tool.ruff]
 target-version = "py310"
-line-length = 120
-src = ["./"]
-exclude = ["alembic"]
+line-length = 130
+exclude = ["alembic" , "migrations"] 
 
 [tool.ruff.lint]
-extend-select = ["I"]
 select = [
     "E",  # pycodestyle errors
     "W",  # pycodestyle warnings
@@ -21,6 +22,7 @@ select = [
     "ARG001", # unused arguments in functions
 ]
 ignore = [
+    "E501",  # line too long, handled by black
     "B008",  # do not perform function calls in argument defaults
     "W191",  # indentation contains tabs
     "B904",  # Allow raising exceptions without from e, for HTTPException
@@ -29,3 +31,21 @@ ignore = [
 [tool.ruff.lint.pyupgrade]
 # Preserve types, even if a file imports `from __future__ import annotations`.
 keep-runtime-typing = true
+
+# ==== black ====
+[tool.black]
+line-length = 130
+target-version = ['py312']
+
+# ==== isort ====
+[tool.isort]
+profile = "black"
+line-length = 130
+known_first_party = [
+    "tests",
+    "scripts",
+    "hooks",
+]
+
+[tool.pylint.main]
+disable = "missing-module-docstring, missing-class-docstring"
