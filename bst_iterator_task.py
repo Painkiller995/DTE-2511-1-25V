@@ -3,6 +3,9 @@ Implements a BSTIterator class that enables in-order traversal of a Binary Searc
 
 This implementation is based on the algorithm explained in the following video:
 https://www.youtube.com/watch?app=desktop&v=RXy5RzGF5wo
+
+This implementation could be improved in the feature please check github for the latest version.
+https://github.com/Painkiller995/DTE-2511-1-25V
 """
 
 from BST import BST
