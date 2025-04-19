@@ -1,3 +1,10 @@
+"""
+Implements a BSTIterator class that enables in-order traversal of a Binary Search Tree (BST).
+
+This implementation is based on the algorithm explained in the following video:
+https://www.youtube.com/watch?app=desktop&v=RXy5RzGF5wo
+"""
+
 from BST import BST
 
 
