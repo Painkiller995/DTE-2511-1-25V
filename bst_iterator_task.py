@@ -2,7 +2,7 @@
 Implements a BSTIterator class that enables in-order traversal of a Binary Search Tree (BST).
 
 This implementation is based on the algorithm explained in the following video:
-https://www.youtube.com/watch?app=desktop&v=RXy5RzGF5wo
+https://www.youtube.com/watch?v=g_S5WuasWUE
 
 This implementation could be improved in the feature please check github for the latest version.
 https://github.com/Painkiller995/DTE-2511-1-25V
@@ -24,10 +24,10 @@ class BSTIterator:
 
     def __next__(self):
         while self.has_next():
-            if self.current is not None:  # if current node is not None
+            if self.current is not None:
                 self.stack.append(self.current)  # Add current node to stack
                 self.current = self.current.left  # Move to the left child
-            else:  # if current node is None
+            else:
                 self.current = self.stack.pop()  # Pop the last node from stack
                 result = self.current.element  # Get the element of the current node
                 self.current = self.current.right  # Move to the right child
