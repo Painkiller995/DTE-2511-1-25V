@@ -9,12 +9,15 @@ class BSTIterator:
     def __iter__(self):
         return self
 
+    def has_next(self):
+        return self.current is not None or len(self.stack) > 0
+
     def __next__(self):
-        while self.current is not None or len(self.stack) > 0:
-            if self.current is not None:
+        while self.has_next():
+            if self.current is not None:  # if current node is not None
                 self.stack.append(self.current)  # Add current node to stack
                 self.current = self.current.left  # Move to the left child
-            else:
+            else:  # if current node is None
                 self.current = self.stack.pop()  # Pop the last node from stack
                 result = self.current.element  # Get the element of the current node
                 self.current = self.current.right  # Move to the right child
