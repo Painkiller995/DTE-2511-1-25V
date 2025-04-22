@@ -30,11 +30,14 @@ class GraphTopologicalSorting(Graph):
         """
         A utility function to perform topological sorting.
         """
+
+        if node in self._visited:
+            return
+
         self._visited.add(node)
 
         for neighbor in self._adjacency_list[node]:
-            if neighbor not in self._visited:
-                self._topological_sort_util(neighbor)
+            self._topological_sort_util(neighbor)
 
         self._stack.append(node)
 
