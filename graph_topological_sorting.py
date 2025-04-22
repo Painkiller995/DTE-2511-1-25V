@@ -15,15 +15,14 @@ class GraphTopologicalSorting(Graph):
         self._stack = []
         self._visited = set()
 
-    def topological_sort(self, label: str) -> list:
+    def topological_sort(self) -> list:
         """
         Performs topological sorting on the graph.
         """
-        if label not in self._nodes:
-            raise ValueError("Node not found in the graph.")
 
-        node = self._nodes[label]
-        self._topological_sort_util(node)
+        for node in self._nodes.values():
+            if node not in self._visited:
+                self._topological_sort_util(node)
 
         return self._stack[::-1]  # Return in reverse order
 
@@ -54,6 +53,6 @@ if __name__ == "__main__":
     print("--" * 20)
 
     print("Topological Sort:")
-    sorted_nodes = graph.topological_sort("X")
+    sorted_nodes = graph.topological_sort()
     for node in sorted_nodes:
         print(node._label, end=" ")
