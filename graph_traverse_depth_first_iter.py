@@ -24,6 +24,7 @@ class GraphTraverseDepthFirst(Graph):
 
         while stack:
             node = stack.pop()
+
             if node in visited:
                 continue
 
@@ -33,17 +34,20 @@ class GraphTraverseDepthFirst(Graph):
                 if neighbor not in visited:
                     stack.append(neighbor)
 
+            print(node._label)
+
 
 if __name__ == "__main__":
     graph = GraphTraverseDepthFirst()
-    graph.add_node("one")
-    graph.add_node("two")
-    graph.add_node("three")
-    graph.add_node("four")
-    graph.add_edge("three", "two")
-    graph.add_edge("three", "four")
-    graph.add_edge("two", "one")
-    graph.add_edge("four", "one")
+    graph.add_node("A")
+    graph.add_node("B")
+    graph.add_node("C")
+    graph.add_node("D")
+    graph.add_edge("A", "B")
+    graph.add_edge("B", "D")
+    graph.add_edge("B", "D")
+    graph.add_edge("D", "C")
+    graph.add_edge("A", "C")
     print(graph)
     print("--" * 20)
-    graph.traverse_depth_first("three")
+    graph.traverse_depth_first("A")
