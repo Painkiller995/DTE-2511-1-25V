@@ -7,6 +7,7 @@ https://github.com/Painkiller995/DTE-2511-1-25V
 """
 
 import heapq
+import itertools
 
 from weighted_graph_obj import Edge, Node, WeightedGraph
 
@@ -31,7 +32,50 @@ class Dijkstra(WeightedGraph):
         Args:
             start_label (str): The label of the starting node.
         """
-        pq = []  # Priority queue for the nodes to visit
+
+        start_node = self._nodes[start_label]
+
+        if start_node is None:
+            raise ValueError(f"Node {start_label} not found in the graph.")
+
+        pq = []
+
+        self._distances[start_node] = 0
+        heapq.heappush(pq, (0, start_node))
+
+        visited = set()
+
+        while pq:
+            current_weight, current_node = heapq.heappop(pq)
+
+            for edge in current_node.list_edges():
+                neighbor = edge.to_node
+                weight = edge.weight
+
+                if neighbor in visited:
+                    continue
+
+                new_distance = current_weight + weight
+
+                print(f"New distance for {neighbor._label} starting from {current_node._label} is {new_distance}")
+
+                if new_distance < self._distances.get(neighbor, 1000):
+                    self._distances[neighbor] = new_distance
+                    self._previous_nodes[neighbor] = current_node
+                    heapq.heappush(pq, (edge.weight, edge.to_node))
+
+            visited.add(current_node)
+
+    def print_table(self) -> None:
+        """
+        Prints the table of distances and previous nodes.
+        """
+        print("Node\tDistance\tPrevious Node")
+        for node in self._nodes.values():
+            distance = self._distances.get(node, float("inf"))
+            previous = self._previous_nodes.get(node, None)
+            previous_label = previous._label if previous else "None"
+            print(f"{node._label}\t{distance}\t\t{previous_label}")
 
 
 if __name__ == "__main__":
@@ -50,3 +94,5 @@ if __name__ == "__main__":
     graph.add_edge("D", "E", 5)
 
     print(graph)
+    graph.dijkstra("A")
+    graph.print_table()
