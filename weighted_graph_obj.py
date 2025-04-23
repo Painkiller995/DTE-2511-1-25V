@@ -78,7 +78,7 @@ class WeightedGraph:
     def __str__(self) -> str:
         result = ""
         for node in self._nodes.values():
-            edges = ", ".join(f"({node._label} --> {edge.to_node._label} weight: {edge.weight})" for edge in node.list_edges())
+            edges = ", ".join(f"({node._label} --> {edge.to_node._label}, weight: {edge.weight})" for edge in node.list_edges())
             result += f"{node._label}: {edges}\n"
         return result.strip()
 
