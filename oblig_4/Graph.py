@@ -10,7 +10,7 @@ class Graph:
         neighbors = {v: [] for v in self.vertices}
         for u, v in edges:
             neighbors[u].append(v)
-            # neighbors[v].append(u)  # assuming undirected graph
+            # neighbors[v].append(u)  # Uncomment if you want an undirected graph
         return neighbors
 
     def get_size(self):
