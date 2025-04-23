@@ -1,5 +1,5 @@
 """
-This module is an implementation of a weighted graph.
+This module is an implementation of a weighted undirected graph.
 
 This implementation could be improved in the feature please check github for the latest version.
 https://github.com/Painkiller995/DTE-2511-1-25V
@@ -75,3 +75,23 @@ class WeightedGraph:
 
         from_edges.append(new_from_edge)
         to_edges.append(new_to_edge)
+
+    def __str__(self) -> str:
+        result = ""
+        for node, edges in self._adjacency_list.items():
+            result += f"{node._label}: "
+            for edge in edges:
+                result += f"({node._label} -> {edge.to_node._label} : {edge.weight}) "
+            result += "\n"
+        return result
+
+
+if __name__ == "__main__":
+    graph = WeightedGraph()
+    graph.add_node("A")
+    graph.add_node("B")
+    graph.add_node("C")
+    graph.add_edge("A", "B", 3)
+    graph.add_edge("A", "C", 2)
+
+    print(graph)
