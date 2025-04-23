@@ -51,7 +51,8 @@ class WeightedGraph:
     """
 
     def __init__(self):
-        self._nodes = {}
+        self._nodes: dict[str, Node] = {}
+        self._visited: set[Node] = set()
 
     def add_node(self, label: str):
         new_node = Node(label)
@@ -82,6 +83,17 @@ class WeightedGraph:
             result += f"{node._label}: {edges}\n"
         return result.strip()
 
+    def has_cycle(self, node, parent=None) -> bool:
+        self._visited.add(node)
+        for edge in node.list_edges():
+            neighbor = edge.to_node
+            if neighbor not in self._visited:
+                if self.has_cycle(neighbor, node):
+                    return True
+            elif parent is not None and neighbor != parent:
+                return True
+        return False
+
 
 if __name__ == "__main__":
     graph = WeightedGraph()
@@ -89,6 +101,12 @@ if __name__ == "__main__":
     graph.add_node("B")
     graph.add_node("C")
     graph.add_edge("A", "B", 3)
-    graph.add_edge("A", "C", 2)
+    graph.add_edge("B", "C", 2)
+    # graph.add_edge("A", "C", 4)
 
     print(graph)
+
+    print("--" * 20)
+
+    res = graph.has_cycle(graph._nodes["A"])
+    print(f"Graph has cycle: {res}")
