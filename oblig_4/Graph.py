@@ -1,3 +1,13 @@
+"""
+This module is a re-implementation of the Graph class and its methods.
+
+Based on the original code provided in the course material
+
+This implementation could be improved in the feature please check github for the latest version.
+https://github.com/Painkiller995/DTE-2511-1-25V
+
+"""
+
 from collections import deque
 
 
