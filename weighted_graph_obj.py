@@ -23,6 +23,12 @@ class Node:
         edge = Edge(from_node=self, to_node=target_node, weight=weight)
         self._edges.append(edge)
 
+    def list_edges(self) -> list["Edge"]:
+        """
+        Returns a list of edges connected to this node.
+        """
+        return self._edges
+
 
 class Edge:
     """
@@ -72,7 +78,7 @@ class WeightedGraph:
     def __str__(self) -> str:
         result = ""
         for node in self._nodes.values():
-            edges = ", ".join(f"({node._label} --> {edge.to_node._label} weight: {edge.weight})" for edge in node._edges)
+            edges = ", ".join(f"({node._label} --> {edge.to_node._label} weight: {edge.weight})" for edge in node.list_edges())
             result += f"{node._label}: {edges}\n"
         return result.strip()
 
