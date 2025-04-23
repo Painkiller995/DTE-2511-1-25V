@@ -5,6 +5,7 @@
         "inorder",
         "padx",
         "pady",
+        "popleft",
         "postorder",
         "preorder",
         "regnr",
@@ -13,7 +14,7 @@
         "ZÆØÅ"
     ],
     "github.copilot.enable": {
-        "*": false,
+        "*": true,
         "plaintext": false,
         "markdown": false,
         "scminput": false,

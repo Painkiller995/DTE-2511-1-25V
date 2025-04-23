@@ -40,6 +40,9 @@ class Edge:
         self.to_node = to_node
         self.weight = weight
 
+    def __lt__(self, other):
+        return self.weight < other.weight
+
 
 class WeightedGraph:
     """
