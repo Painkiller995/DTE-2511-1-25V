@@ -212,6 +212,10 @@ def main():
             print(f"{e} is a leaf, values to the root is {tree.path(e)}")
     print("-" * 20)
 
+    print("Get non existing node")
+    print(f"{tree.getNode(100)} is not in the tree")
+    print("-" * 20)
+
 
 if __name__ == "__main__":
     main()
