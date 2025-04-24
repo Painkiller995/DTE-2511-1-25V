@@ -36,14 +36,15 @@ class BST:
                 else:
                     return False  # Duplicate node not inserted
 
-            # Create the new node and attach it to the parent node
-            new_node = self.createNewNode(e)
-            new_node.parent = parent
+            newNode = self.createNewNode(e)
 
+            newNode.parent = parent  # Set the parent of the new node
+
+            # Create the new node and attach it to the parent node
             if e < parent.element:
-                parent.left = new_node
+                parent.left = newNode
             else:
-                parent.right = new_node
+                parent.right = newNode
 
         self.size += 1  # Increase tree size
         return True  # Element inserted
@@ -179,26 +180,3 @@ class TreeNode:
         self.left = None  # Point to the left node, default None
         self.right = None  # Point to the right node, default None
         self.parent = None  # Point to the parent node, default None
-
-
-if __name__ == "__main__":
-    # Test the BST class
-    bst = BST()
-    bst.insert(5)
-    bst.insert(3)
-    bst.insert(7)
-    bst.insert(2)
-    bst.insert(4)
-    bst.insert(6)
-    bst.insert(8)
-
-    print("Inorder traversal:")
-    bst.inorder()  # Output: 2 3 4 5 6 7 8
-    print("\nSize of the tree:", bst.getSize())  # Output: 7
-
-    print("Deleting 3...")
-    bst.delete(3)
-    print("Inorder traversal after deletion:")
-    bst.inorder()  # Output: 2 4 5 6 7 8
-    print("\nSize of the tree after deletion:", bst.getSize())  # Output: 6
-    print("Path to 6:", [node.element for node in bst.path(6)])  # Output: [5, 7, 6]
