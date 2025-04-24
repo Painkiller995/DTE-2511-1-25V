@@ -8,7 +8,7 @@ This implementation could be improved in the feature please check github for the
 https://github.com/Painkiller995/DTE-2511-1-25V
 """
 
-from BST import BST
+from bst_parent import BST
 
 
 class BSTIterator:
