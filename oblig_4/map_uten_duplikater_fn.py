@@ -25,17 +25,17 @@ class Map:
 
     # Add an entry (key, value) into the map
     def put(self, key, value):
-        # ----------------------------------------------------------------
-        # To avoid duplicates, we need to check if the key already exists
-        if self.containsKey(key):
-            return
-        # ----------------------------------------------------------------
-
         if self.size >= self.capacity * self.loadFactorThreshold:
             if self.capacity == MAXIMUM_CAPACITY:
                 raise RuntimeError("Exceeding maximum capacity")
 
             self.rehash()
+
+        #  ------------------------------------------
+        # This will avoid duplicates in the map
+        if self.containsKey(key):
+            self.remove(key)  # Remove the old entry
+        #  ------------------------------------------
 
         bucketIndex = self.getHash(hash(key))
 
