@@ -81,6 +81,20 @@ class Graph:
                     if new_distance < distances[neighbor]:
                         distances[neighbor] = new_distance
                         heappush(min_heap, (new_distance, neighbor))
+                        parent_nodes[neighbor] = current_node
 
-        paths = {"A": ["A"]}  # dummy, bygg opp basert på parent_nodes
+        paths = {}
+
+        def add_parent_node(vertex, vertex_parent_list):
+            if parent_nodes[vertex]:
+                parent_vertex = parent_nodes[vertex]
+                vertex_parent_list.append(parent_vertex)
+                add_parent_node(parent_vertex, vertex_parent_list)
+
+        for vertex in self._vertices:
+            vertex_parent_list = []
+            add_parent_node(vertex, vertex_parent_list)
+            vertex_parent_list.reverse()
+            paths[vertex] = vertex_parent_list + [vertex]
+
         return distances, paths
