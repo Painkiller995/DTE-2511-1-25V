@@ -83,6 +83,11 @@ class Graph:
                         heappush(min_heap, (new_distance, neighbor))
                         parent_nodes[neighbor] = current_node
 
+        paths = self.make_paths(parent_nodes)
+
+        return distances, paths
+
+    def make_paths(self, parent_nodes):
         paths = {}
 
         def add_parent_node(vertex, vertex_parent_list):
@@ -97,4 +102,4 @@ class Graph:
             vertex_parent_list.reverse()
             paths[vertex] = vertex_parent_list + [vertex]
 
-        return distances, paths
+        return paths
