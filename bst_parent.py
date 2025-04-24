@@ -96,7 +96,7 @@ class BST:
         current = self.root  # Start from the root
 
         while current != None:
-            list.append(current)  # Add the node to the list
+            list.append(current.element)  # Add the node to the list
             if e < current.element:
                 current = current.left
             elif e > current.element:
@@ -107,7 +107,7 @@ class BST:
         if current == None and e not in list:
             return []
 
-        return list  # Return an array of nodes
+        return list[::-1]  # Return an array of nodes
 
     # Delete an element from the binary search tree.
     # Return True if the element is deleted successfully
@@ -190,47 +190,28 @@ class TreeNode:
         self.parent = None  # Point to the parent node, default None
 
 
+def main():
+    tree = BST()  # Create a new BST instance
+
+    s = input("Enter integers in one line for tree separated by space: ")
+
+    list1 = [int(x) for x in s.split()]
+
+    for e in list1:
+        print(f"{e} are inserted into the tree")
+        tree.insert(e)
+
+    print("-" * 20)
+    delete_first = list1[0]
+    tree.delete(delete_first)
+    print(f"Deletes {delete_first}")
+    print("-" * 20)
+
+    for e in list1:
+        if tree.isLeaf(e):
+            print(f"{e} is a leaf, values to the root is {tree.path(e)}")
+    print("-" * 20)
+
+
 if __name__ == "__main__":
-    # Test the BST class
-    bst = BST()
-    bst.insert(8)
-    bst.insert(3)
-    bst.insert(10)
-    bst.insert(1)
-    bst.insert(6)
-    bst.insert(14)
-    bst.insert(4)
-    bst.insert(7)
-    bst.insert(13)
-
-    print("-" * 50)
-    print("Inorder traversal:")
-    bst.inorder()  # Output: 1 3 4 6 7 8 10 13 14
-    print("\nSize of the tree:", bst.getSize())  # Output: Size of the tree: 9
-
-    print("-" * 50)
-    print("Search for 6:", bst.search(6))  # Output: Search for 6: True
-    print("Search for 15:", bst.search(15))  # Output: Search for 15: False
-    print("Path to 6:", [node.element for node in bst.path(6)])  # Output: Path to 6: [8, 3, 6]
-
-    print("-" * 50)
-    print("Deleting 3...")
-    bst.delete(3)
-    print("Inorder traversal after deleting 3:")
-    bst.inorder()  # Output: 1 4 6 7 8 10 13 14
-    print("\nSize of the tree after deletion:", bst.getSize())  # Output: Size of the tree after deletion: 8
-    print("-" * 50)
-
-    print("Is 3 a leaf?", bst.isLeaf(3))  # Output: Is 3 a leaf? False
-    print("Is 13 a leaf?", bst.isLeaf(13))  # Output: Is 13 a leaf? True
-    print("-" * 50)
-
-    print("Is the tree empty?", bst.isEmpty())  # Output: Is the tree empty? False
-    print("Size of the tree:", bst.getSize())  # Output: Size of the tree: 8
-    print("-" * 50)
-
-    print("Clearing the tree...")
-    bst.clear()  # Clear the tree
-    print("Size of the tree after clearing:", bst.getSize())  # Output: Size of the tree after clearing: 0
-    print("Is the tree empty?", bst.isEmpty())  # Output: Is the tree empty? True
-    print("-" * 50)
+    main()
