@@ -38,6 +38,7 @@ class Graph:
         visit_order = []  # Ny liste for besøksrekkefølge
 
         visited.add(start_node)  # Marker startnode som besøkt
+        visit_order.append(start_node)
         # Legg alle kanter fra startnode inn i prioritetskøen (vekt, fra, til)
         for neighbor, weight in self._neighbors[start_node]:  # finn  naboer via nabolista
             if weight is not None:  # Only consider weighted edges
@@ -50,6 +51,7 @@ class Graph:
                 # ..da legger vi til kanten i MST (det er den minste kanten)
                 # ..og markerer den som besøkt
                 visited.add(to_vertex)
+                visit_order.append(to_vertex)
                 mst_edges.append((from_vertex, to_vertex, weight))  # oppdaterer MST
                 total_weight += weight  # oppdaterer total vekt
 
